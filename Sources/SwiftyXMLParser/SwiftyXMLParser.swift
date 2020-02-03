@@ -53,10 +53,10 @@ public func ?<< <T>(lhs: inout [T], rhs: T?) {
 
 
 /**
- Director class to parse and access XML document. 
- 
+ Director class to parse and access XML document.
+
  You can parse XML docuemnts with parse() method and get the accessor.
- 
+
  ### Example
  ```
     let string = "<ResultSet><Result><Hit index="1"><Name>ほげ</Name></Hit><Hit index="2"><Name>ふが</Name></Hit></Result></ResultSet>"
@@ -88,17 +88,17 @@ public func ?<< <T>(lhs: inout [T], rhs: T?) {
 open class XML {
     /**
     Interface to parse NSData
-    
+
     - parameter data:NSData XML document
     - returns:Accessor object to access XML document
     */
     open class func parse(_ data: Data) -> Accessor {
         return Parser().parse(data)
     }
-    
+
     /**
      Interface to parse String
-     
+
      - Parameter str:String XML document
      - Returns:Accessor object to access XML document
      */
@@ -106,13 +106,13 @@ open class XML {
         guard let data = str.data(using: String.Encoding.utf8) else {
             throw XMLError.failToEncodeString
         }
-        
+
         return Parser().parse(data)
     }
-    
+
     /**
      Interface to parse NSData
-     
+
      - parameter data:NSData XML document
      - parameter manner:NSCharacterSet If you wannna trim Text, assign this arg
      - returns:Accessor object to access XML document
@@ -120,10 +120,10 @@ open class XML {
     open class func parse(_ data: Data, trimming manner: CharacterSet) -> Accessor {
         return Parser(trimming: manner).parse(data)
     }
-    
+
     /**
      Interface to parse String
-     
+
      - Parameter str:String XML document
      - parameter manner:NSCharacterSet If you wannna trim Text, assign this arg
      - Returns:Accessor object to access XML document
@@ -132,10 +132,10 @@ open class XML {
         guard let data = str.data(using: String.Encoding.utf8) else {
             throw XMLError.failToEncodeString
         }
-        
+
         return Parser(trimming: manner).parse(data)
     }
-    
+
     open class func document(_ accessor: Accessor) throws -> String {
         return try Converter(accessor).makeDocument()
     }
